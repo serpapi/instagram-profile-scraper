@@ -324,7 +324,7 @@ Some fields appear only for some accounts and posts:
 
 The link to a post is `https://www.instagram.com/p/` followed by its `shortcode`, e.g., `https://www.instagram.com/p/DfhrtQEykDv/`. Posts have no date, likes, comments, or views, but most `accessibility_caption` values include the date, e.g., "Photo by National Geographic on October 20, 2026. May be an image of outdoors and text." The first posts can be older than the next ones, e.g., the first 3 posts of `natgeo` are from November 7, October 27, and October 20, 2026, and the fourth from November 11. These are probably the posts pinned to the profile; the response doesn't mark them.
 
-Each image comes with two links. The Instagram links, e.g., `profile_pic_url` and `display_url`, are signed and expire after about 4 days, after which Instagram returns `403` with "URL signature expired". The `serpapi_` links serve the same image from SerpApi without an API key, so use them to show or download images after the Instagram links expire. They don't last forever either: the ones in the documentation's September example return `404`. Download the images you want to keep.
+Each image comes with two links. The Instagram links, e.g., `profile_pic_url` and `display_url`, are signed and expire after about 4 days, after which Instagram returns `403` with "URL signature expired". The `serpapi_` links serve the same image from SerpApi without an API key, so use them to show images after the Instagram links expire. They don't last forever either: the ones in the documentation's September example return `404`, so request the profile again for fresh links.
 
 To get the next 12 posts, send `serpapi_pagination.next_page_token` as `next_page_token` with the same `profile_id`, or follow `serpapi_pagination.next`. Every page repeats the profile details in `profile_results`. The last page has no `serpapi_pagination`, e.g., the fourth page of `neuralink`, with 7 posts.
 
@@ -492,7 +492,7 @@ Use SerpApi APIs without writing code:
 - Compare the content mix of brand accounts: how many reels, photos, and carousels they post, and what their captions say.
 - Research public creator and brand accounts for influencer marketing, with their followers, verified status, bio, and collaboration posts.
 - Collect the bio links of brand accounts to see which stores, campaigns, and landing pages they promote.
-- Archive the posts, captions, and images of your own brand's account by following `next_page_token` to the last page.
+- Audit the alt text of your brand's posts with `accessibility_caption`, following `next_page_token` to the last page.
 - Give AI agents and social listening tools a way to look up an Instagram account and its latest posts.
 
 ## Related scrapers
